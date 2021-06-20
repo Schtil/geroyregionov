@@ -1,3 +1,3 @@
 <?php
 
-file_put_contents("log.txt", json_encode($_GET));
+file_put_contents("log.txt", json_encode($_REQUEST));
