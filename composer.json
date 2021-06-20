@@ -1,0 +1,9 @@
+{
+  "require": {
+    "gabordemooij/redbean": "dev-master",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-curl": "*",
+    "facebook/graph-sdk": "^5.7"
+  }
+}
