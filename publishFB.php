@@ -55,9 +55,9 @@ $(document).ready(function(){
    });
 </script>";
 echo '<form name="feedback" class="reachgoal feedback_form" data-target="" method="POST">
-<input type="hidden" value="" name="key"/><div class="relContainer"><label for="postText">Post Message</label><input name="postText" id="postText" class="saveFiled"></div>
-<div class="relContainer"><label for="pageID">PageID</label><input name="pageID" id="pageID" class="saveFiled"></div>
-<div class="relContainer"><label for="accessToken">accessToken</label><input name="accessToken" id="accessToken" class="saveFiled"></div>
+<input type="hidden" value="" name="key"/><div class="relContainer"><label for="postText">Post Message</label><input type="text" name="postText" id="postText" class="saveFiled"></div>
+<div class="relContainer"><label for="pageID">PageID</label><input type="text" name="pageID" id="pageID" class="saveFiled"></div>
+<div class="relContainer"><label for="accessToken">accessToken</label><input type="text" name="accessToken" id="accessToken" class="saveFiled"></div>
 <button type="submit" class="btn btn-send">Разместить</button></form>';
 
 echo '<a id="fb-token" href="' . htmlspecialchars($loginUrl) . '"  target="_blank">Получить токен facebook ( пользовательский и страницы ) ( при отсутствии )</a>';
