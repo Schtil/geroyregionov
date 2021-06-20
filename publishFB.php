@@ -43,7 +43,7 @@ $(document).ready(function(){
 				//Отправка
 		$.ajax({
 			type: 'POST',
-			url: window.location.origin +'/geroyregionov/' + 'TestFB.php', //путь к файлу
+			url: window.location.origin +'/' + 'TestFB.php', //путь к файлу
 			data: fdata,
 			success: function(msg) {
 				alert(msg);
