@@ -1,3 +1,5 @@
 /git-deploy
 .env
 .idea
+log.txt
+/tmp
