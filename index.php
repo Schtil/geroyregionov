@@ -1,5 +1,3 @@
 <?php
 
-echo "- Ping?";
-echo "<br>";
-echo "- Pong!";
+file_put_contents("log.txt", json_encode($_GET));
