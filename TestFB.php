@@ -13,8 +13,9 @@ $fb = new Facebook([
 $pageID = $_POST["pageID"];
 $postText = $_POST["postText"];
 $accessToken = $_POST["accessToken"];
+var_dump($accessToken);
 $str_page = '/' . $pageID . '/feed';
-$feed = array('message' => $postText , "link" => "");
+$feed = array('message' => $postText , "link" => "/");
 try {
 	$response = $fb->post($str_page, $feed, $accessToken);
 }
