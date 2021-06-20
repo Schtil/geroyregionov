@@ -5,6 +5,9 @@ use GeroyRegionov\Config\index as Config;
 
 spl_autoload_register(function ($class_name) {
     $class_name = mb_strtolower(str_replace(__NAMESPACE__ ."\\", "", $class_name));
+    if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
+        $class_name = str_replace("\\", "/", $class_name);
+    }
     include $class_name . '.php';
 });
 
