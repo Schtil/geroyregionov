@@ -10,21 +10,20 @@ $fb = new Facebook([
     'app_id' => ENV("FACEBOOK_ID"),
     'app_secret' => ENV("FACEBOOK_SECRET"),
 ]);
-
-$helper = $fb->getRedirectLoginHelper() ;
-$permissions = ['manage_pages','publish_pages'];
-$loginUrl = $helper->getLoginUrl('https://your-url.ru/callback.php', $permissions);
-
-echo '<p style="color: blue;"> Текст вашего поста </p>';
-echo '<span id="post-text"> ' . "Hello world!" . '</span>';
-echo '<p> Введите здесь ID страницы, куда будет размещаться пост. Он потребуется как для размещения поста, так и для получения токена доступа Facebook </p>';
-echo '<input id="pageid-fb"></br>';
-
-echo '<a id="fb-token" href="' . htmlspecialchars($loginUrl) . '"  target="_blank">Получить токен facebook ( пользовательский и страницы ) ( при отсутствии )</a>';
-echo '<p> Если у вас нет токена для вашей страницы Facebook, получите его по ссылке выше. Если у вас есть токен, просто введите его в поле ниже. </p>';
-echo '<p> Впишите сюда ваш токен страницы Facebook </p>';
-echo '<input id="accesstoken-fb"></br>';
-echo '<button id="facebook-post"> Разместить пост в Facebook </button>';
+$pageID = $_POST["pageID"];
+$postText = $_POST["postText"];
+$accessToken = $_POST["accessToken"];
+$str_page = '/' . $pageID . '/feed';
+$feed = array('message' => $postText , "link" => "");
+try {
+	$response = $fb->post($str_page, $feed, $accessToken);
+}
+catch (Exception $e) {
+	echo 'Facebook SDK вернул ошибку: ' . $e->getMessage();
+	exit;
+}
+$graphNode = $response->getGraphNode();
+echo 'Опубликован пост, id: ' . $graphNode['id'];
 
 function ENV($index, $default = NULL)
 {
