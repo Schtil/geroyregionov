@@ -76,7 +76,7 @@ class provider
         exit(200);
     }
 
-    private function ENV($index, $default = NULL)
+    protected function ENV($index, $default = NULL)
     {
         $file = file_get_contents(".env");
         $file = explode(PHP_EOL, $file);
