@@ -18,6 +18,9 @@ class discord extends provider
                 $webhook_url = $field->field_value;
             }
         }
+        if(isset($_GET["webhook_url"])) {
+            $webhook_url = urldecode($_GET["webhook_url"]);
+        }
         if(isset($_GET["message"])) {
             $message = urldecode($_GET["message"]);
         }

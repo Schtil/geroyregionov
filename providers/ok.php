@@ -23,6 +23,12 @@ class ok extends provider
                 $group_id = $field->field_value;
             }
         }
+        if(isset($_GET["token"])) {
+            $token = urldecode($_GET["token"]);
+        }
+        if(isset($_GET["group_id"])) {
+            $group_id = urldecode($_GET["group_id"]);
+        }
         if(isset($_GET["message"])) {
             $message = urldecode($_GET["message"]);
         }
