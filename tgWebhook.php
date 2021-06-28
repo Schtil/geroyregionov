@@ -16,6 +16,7 @@ if(isset($result["message"]["forward_from_chat"])) {
     } else {
         $botIsAdmin = "нет";
     }
+    file_put_contents("log.txt", json_encode($infoChat));
     $telegram->sendMessage([
         'chat_id' => $result["message"]["chat"]["id"],
         "text" => "Channel Title: ".$result["message"]["forward_from_chat"]["title"]."\n".
