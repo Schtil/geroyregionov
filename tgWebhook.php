@@ -8,15 +8,14 @@ $result = $telegram -> getWebhookUpdates();
 $botIsAdmin = "нет";
 if(isset($result["message"]["forward_from_chat"])) {
     $infoChat = json_decode(
-        file_get_contents("https://api.telegram.org/bot".ENV("TG_API_KEY")."/getChat?chat_id=".$result["message"]["forward_from_chat"]["id"]),
+        file_get_contents("https://api.telegram.org/bot".ENV("TG_API_KEY")."/getChatAdministrators?chat_id=".$result["message"]["forward_from_chat"]["id"]),
         1
     );
-    if($infoChat["ok"] == "true") {
+    if($infoChat["ok"]) {
         $botIsAdmin = "да";
     } else {
         $botIsAdmin = "нет";
     }
-    file_put_contents("log.txt", json_encode($infoChat));
     $telegram->sendMessage([
         'chat_id' => $result["message"]["chat"]["id"],
         "text" => "Channel Title: ".$result["message"]["forward_from_chat"]["title"]."\n".
