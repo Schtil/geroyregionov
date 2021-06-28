@@ -11,7 +11,7 @@ if(isset($result["message"]["forward_from_chat"])) {
         file_get_contents("https://api.telegram.org/bot".ENV("TG_API_KEY")."/getChat?chat_id=".$result["message"]["forward_from_chat"]["id"]),
         1
     );
-    if($infoChat["ok"]) {
+    if($infoChat["ok"] == "true") {
         $botIsAdmin = "да";
     } else {
         $botIsAdmin = "нет";
