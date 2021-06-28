@@ -45,14 +45,66 @@ class provider
         return ["status" => "ok"];
     }
 
-    public function push(){
-        return $this->error("105", "Method {". __METHOD__."} not supported for this provider. Please, contact administrators");
+    public function get($field = null){
+
+        if(isset($_GET["field"]) and $field == null) {
+            $field = urldecode($_GET["field"]);
+        }
+        $checkResult = $this->checkParams([
+            ["field",$field],
+        ]);
+        if($checkResult["status"] != "ok") {
+            $this->error("120", "Some required fields were not specified. The field {".$checkResult["param"]."} cannot be empty");
+        }
+        $value = null;
+        $info = null;
+        $link = null;
+        $fields = $this->getProviderFields();
+        foreach ($fields as $fieldDB) {
+            if($fieldDB->field_name == $field) {
+                $value = $fieldDB->field_value;
+                $link = $fieldDB->field_link;
+                $info = $fieldDB->field_info;
+            }
+        }
+        if(is_null($value)) {
+            $this->error("404", "Field {".$field."} not found from provider {".$this->class);
+            return "error";
+        } else {
+           return $this->answer(["field" => $field, "value" => $value, "info" => $info, "link" => $link]);
+        }
     }
-    public function get(){
-        return $this->error("105", "Method {". __METHOD__."} not supported for this provider. Please, contact administrators");
-    }
+
     public function set(){
-        return $this->error("105", "Method {". __METHOD__."} not supported for this provider. Please, contact administrators");
+        $field = null;
+        $value = null;
+        if(isset($_GET["field"])) {
+            $field = urldecode($_GET["field"]);
+        }
+        if(isset($_GET["value"])) {
+            $value = urldecode($_GET["value"]);
+        }
+        $checkResult = $this->checkParams([
+            ["field",$field],
+            ["value",$value],
+        ]);
+        if($checkResult["status"] != "ok") {
+            $this->error("120", "Some required fields were not specified. The field {".$checkResult["param"]."} cannot be empty");
+        }
+
+        $fields = $this->getProviderFields();
+        foreach ($fields as $fieldDB) {
+            if($fieldDB->field_name == $field) {
+                $fieldDB->field_value = $value;
+                R::store($fieldDB);
+            }
+        }
+        if(is_null($value)) {
+            $this->error("404", "Field {".$field."} not found from provider {".$this->class);
+            return "error";
+        } else {
+            return $this->get($field);
+        }
     }
 
     public function answer($data){
