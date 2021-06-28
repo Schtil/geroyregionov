@@ -22,11 +22,12 @@ if(isset($result["message"]["forward_from_chat"])) {
             "Channel ID: ".$result["message"]["forward_from_chat"]["id"]."\n".
             "Данный бот администратор в этом канале - ". $botIsAdmin,
     ]);
+} else {
+    $telegram->sendMessage([
+        'chat_id' => $result["message"]["chat"]["id"],
+        "text" => "Привет! Перешли мне сообщение из любого канала и я выведу информацию о нем",
+    ]);
 }
-$telegram->sendMessage([
-    'chat_id' => $result["message"]["chat"]["id"],
-    "text" => "Привет! Перешли мне сообщение из любого канала и я выведу информацию о нем",
-]);
 
 function ENV($index, $default = NULL)
 {
