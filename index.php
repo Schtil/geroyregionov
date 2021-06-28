@@ -25,6 +25,7 @@ class index {
     private $params;
 
     public function __construct(){
+        R::setup( "mysql:host=".$this->ENV("MYSQL_HOST","localhost").";dbname=".$this->ENV("MYSQL_DATABASE")."", $this->ENV("MYSQL_USER"), $this->ENV("MYSQL_PASS") );
         if(isset($_GET["mode"])) {
             if($_GET["mode"] == "debug") {
                 $this->params = explode("/","/".$_GET["method"]);
@@ -40,6 +41,13 @@ class index {
     }
 
     public function execute(){
+        if(!isset($_GET["access_token"])){
+            return $this->error(403, "Access token must be set");
+        }
+        $token = R::findOne("tokens", "token = ?", [$_GET["access_token"]]);
+        if(!$token) {
+            return $this->error(109, "Such a access token does not exist");
+        }
         $params = $this->params;
         if(!isset($params[1])) {
             return $this->error(100, "No set name method");

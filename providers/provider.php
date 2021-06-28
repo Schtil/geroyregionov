@@ -11,7 +11,6 @@ class provider
     public $class;
     public function __construct(){
         $this->class = explode("\\",get_class($this))[2];
-        R::setup( "mysql:host=".$this->ENV("MYSQL_HOST","localhost").";dbname=".$this->ENV("MYSQL_DATABASE")."", $this->ENV("MYSQL_USER"), $this->ENV("MYSQL_PASS") );
     }
     public function list(){
         $fieldsData = $this->getProviderFields();
