@@ -1,7 +1,7 @@
-/git-deploy
+public/git-deploy
 .env
 .idea
-log.txt
-/tmp
-/vendor
+public/log.txt
+/public/tmp
+/public/vendor
 composer.lock

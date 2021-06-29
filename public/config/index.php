@@ -35,7 +35,7 @@ class index
 
     private function ENV($index, $default = NULL)
     {
-        $file = file_get_contents(".env");
+        $file = file_get_contents("../.env");
         $file = explode(PHP_EOL, $file);
         $params = [];
         foreach($file as $item)

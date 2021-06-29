@@ -1,0 +1,10 @@
+{
+  "require": {
+    "vendor/gabordemooij/redbean": "dev-master",
+    "ext-json": "*",
+    "ext-mbstring": "*",
+    "ext-curl": "*",
+    "vendor/facebook/graph-sdk": "^5.7",
+    "vendor/irazasyed/telegram-bot-sdk": "2.0"
+  }
+}
