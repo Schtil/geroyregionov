@@ -20,6 +20,7 @@ class provider
                 "field_name" => $fieldData->field_name,
                 "field_value" => $fieldData->field_value,
                 "field_info" => $fieldData->field_info,
+                "field_link" => $fieldData->field_link,
             ];
         }
         $answer = [
@@ -67,10 +68,10 @@ class provider
             }
         }
         if(is_null($value)) {
-            $this->error("404", "Field {".$field."} not found from provider {".$this->class);
+            $this->error("107", "Field {".$field."} not found from provider {".$this->class);
             return "error";
         } else {
-           return $this->answer(["field" => $field, "value" => $value, "info" => $info, "link" => $link]);
+           return $this->answer(["field_name" => $field, "field_value" => $value, "field_info" => $info, "field_link" => $link]);
         }
     }
 
@@ -99,7 +100,7 @@ class provider
             }
         }
         if(is_null($value)) {
-            $this->error("404", "Field {".$field."} not found from provider {".$this->class);
+            $this->error("107", "Field {".$field."} not found from provider {".$this->class);
             return "error";
         } else {
             return $this->get($field);

@@ -38,14 +38,14 @@ class telegram extends provider
         try {
             $status = $telegram->sendMessage(["chat_id" => $channel_id, "text" => $message]);
         } catch (\Exception $exception) {
-            $this->error("116", "An error occurred while executing the Telegram API method", $exception->getMessage());
+            $this->error("110", "An error occurred while executing the Telegram API method", $exception->getMessage());
             return "error";
         }
         if($photo_url != null) {
             try {
                 $telegram->sendPhoto(['chat_id' => $channel_id, 'photo' => $photo_url]);
             } catch (\Exception $exception) {
-                $this->error("116", "An error occurred while executing the Telegram API method", $exception->getMessage());
+                $this->error("110", "An error occurred while executing the Telegram API method", $exception->getMessage());
                 return "error";
             }
         }

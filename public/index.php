@@ -42,29 +42,29 @@ class index {
 
     public function execute(){
         if(!isset($_GET["access_token"])){
-            return $this->error(403, "Access token must be set");
+            return $this->error(103, "Access token must be set");
         }
         $token = R::findOne("tokens", "token = ?", [$_GET["access_token"]]);
         if(!$token) {
-            return $this->error(109, "Such a access token does not exist");
+            return $this->error(104, "Such a access token does not exist");
         }
         $params = $this->params;
         if(!isset($params[1])) {
-            return $this->error(100, "No set name method");
+            return $this->error(105, "No set name method");
         }
         if(!isset($_GET["provider"])) {
-            return $this->error(100,"No set provider");
+            return $this->error(106,"No set provider");
         }
         $providerName = $_GET["provider"];
 
         $classCall = "GeroyRegionov\\providers\\".$providerName;
         if(!class_exists($classCall)) {
-            return $this->error(404,"Not found provider '".$providerName."'");
+            return $this->error(101,"Not found provider '".$providerName."'");
         }
         $provider = new $classCall();
         $methodName = $params[1];
         if(!method_exists($provider,$methodName)) {
-            return $this->error(404,"Not found method '".$methodName."' in provider '".$providerName."'");
+            return $this->error(102,"Not found method '".$methodName."' in provider '".$providerName."'");
         }
         return $provider->$methodName();
     }
